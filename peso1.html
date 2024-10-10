@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chequeo de peso</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #imageView {
+            max-width: 400px;
+            max-height: 400px;
+            margin: 20px auto;
+        }
+        #messageLabel {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Chequeo de peso</h1>
+        <input type="number" id="weightField" placeholder="Ingrese su peso en kg">
+        <button onclick="checkWeight()">Checar de peso</button>
+        <img id="imageView" src="" alt="" style="display: none;">
+        <div id="messageLabel"></div>
+    </div>
+
+    <audio id="audioPlayer" style="display: none;"></audio>
+
+    <script>
+        function checkWeight() {
+            const weightField = document.getElementById('weightField');
+            const imageView = document.getElementById('imageView');
+            const messageLabel = document.getElementById('messageLabel');
+            const weight = parseFloat(weightField.value);
+
+            if (isNaN(weight)) {
+                messageLabel.textContent = "Ingrese un numero valido zunga.";
+                imageView.style.display = 'none';
+                return;
+            }
+
+            if (weight > 90) {
+                displayImage('2f53ee8e2306346e25495be3016c7269.jpg');
+                playSound();
+                messageLabel.textContent = "Gorda piroba";
+            } else if (weight > 61) {
+                displayImage('tabien.jpg');
+                play();
+                messageLabel.textContent = "ta bien";
+            } else {
+                displayImage('iloviu.png');
+                sound();
+                messageLabel.textContent = "ailoviu :)";
+            }
+        }
+
+        function displayImage(imageName) {
+            const imageView = document.getElementById('imageView');
+            imageView.src = imageName;
+            imageView.style.display = 'block';
+        }
+
+        function playSound() {
+            const audioPlayer = document.getElementById('audioPlayer');
+            audioPlayer.src = 'oye_1.mp3';
+            audioPlayer.play().catch(e => {
+                console.error("Error playing sound:", e);
+                document.getElementById('messageLabel').textContent += " (Error al reproducir el sonido)";
+            });
+        }
+	
+	function play() {
+            const audioPlayer = document.getElementById('audioPlayer');
+            audioPlayer.src = 'Tabien.mp3';
+            audioPlayer.play().catch(e => {
+                console.error("Error playing sound:", e);
+                document.getElementById('messageLabel').textContent += " (Error al reproducir el sonido)";
+            });
+        }
+	
+	function sound() {
+            const audioPlayer = document.getElementById('audioPlayer');
+            audioPlayer.src = 'love.mp3';
+            audioPlayer.play().catch(e => {
+                console.error("Error playing sound:", e);
+                document.getElementById('messageLabel').textContent += " (Error al reproducir el sonido)";
+            });
+        }
+    </script>
+</body>
+</html>
